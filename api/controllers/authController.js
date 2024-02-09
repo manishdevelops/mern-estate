@@ -1,6 +1,6 @@
 const bcryptjs = require('bcryptjs');
 const User = require("../models/userModel");
-const errorHandler = require('../utils/error');
+const { errorHandler } = require('../utils/error');
 const jwt = require('jsonwebtoken');
 
 exports.signup = async (req, res, next) => {
@@ -17,6 +17,7 @@ exports.signup = async (req, res, next) => {
 
 exports.signin = async (req, res, next) => {
     const { email, password } = req.body;
+    console.log(errorHandler)
     try {
         const validUser = await User.findOne({ email }).select('+password');
 
@@ -32,6 +33,7 @@ exports.signin = async (req, res, next) => {
 
         res.cookie('access_token', token, { httpOnly: true }).status(200).json(validUser);
     } catch (error) {
+        console.log(error)
         next(error);
     }
 }
