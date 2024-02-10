@@ -17,7 +17,6 @@ exports.signup = async (req, res, next) => {
 
 exports.signin = async (req, res, next) => {
     const { email, password } = req.body;
-    console.log(errorHandler)
     try {
         const validUser = await User.findOne({ email }).select('+password');
 
