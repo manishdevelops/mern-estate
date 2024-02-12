@@ -4,12 +4,15 @@ const dotenv = require('dotenv');
 const userRouter = require('./routes/userRoutes.js');
 const authRouter = require('./routes/authRoutes.js');
 const cors = require('cors');
+const cookieParser = require('cookie-parser');
 
 dotenv.config();
 
 const app = express();
 
 app.use(express.json());
+
+app.use(cookieParser());
 
 app.use(cors());
 
