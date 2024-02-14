@@ -10,5 +10,8 @@ router.delete('/delete/:id', verifyUser.verifyToken, listingController.deleteLis
 
 router.post('/update/:id', verifyUser.verifyToken, listingController.updateListing);
 
+router.get('/get/:id', listingController.getListing);
+
+
 module.exports = router;
 
