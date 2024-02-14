@@ -134,8 +134,21 @@ export default function Profile() {
         }
     }
 
-    const handleListingDelete = () => {
+    const handleListingDelete = async (listingId) => {
+        try {
+            const res = await fetch(`/api/listing/delete/${listingId}`, {
+                method: 'DELETE',
+            });
 
+            const data = await res.json();
+            if (data.success === false) {
+                return;
+            }
+            setUserListings((prev) => prev.filter((listing) => listing._id !== listingId));
+
+        } catch (error) {
+
+        }
     }
 
 
