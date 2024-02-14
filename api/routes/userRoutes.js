@@ -9,5 +9,4 @@ router.post('/update/:id', verifyUser.verifyToken, userController.updateUser);
 router.delete('/delete/:id', verifyUser.verifyToken, userController.deleteUser);
 router.get('/listings/:id', verifyUser.verifyToken, userController.getUserListings);
 
-
 module.exports = router;
