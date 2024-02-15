@@ -92,7 +92,6 @@ export default function UpdateListing() {
                 ...formData,
                 type: e.target.id
             });
-            console.log(1234)
         }
         if (e.target.id === 'parking' || e.target.id === 'furnished' || e.target.id === 'offer') {
             setFormData({
@@ -104,7 +103,7 @@ export default function UpdateListing() {
             setFormData({
                 ...formData,
                 [e.target.id]: e.target.value
-            })
+            });
         }
     };
 
@@ -197,7 +196,6 @@ export default function UpdateListing() {
                                 onChange={handleChange}
                                 checked={formData.type === 'sale'}
                             />
-                            <p> {formData.type === 'sale' ? 123 : 12}</p>
                             <span>Sell</span>
                         </div>
                         <div className='flex gap-2'>
