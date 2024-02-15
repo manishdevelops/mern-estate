@@ -5,8 +5,13 @@ const verifyUser = require('../utils/verifyUser');
 const router = express.Router();
 
 router.get('/test', userController.test);
+
 router.post('/update/:id', verifyUser.verifyToken, userController.updateUser);
+
 router.delete('/delete/:id', verifyUser.verifyToken, userController.deleteUser);
+
 router.get('/listings/:id', verifyUser.verifyToken, userController.getUserListings);
+
+router.get('/:id', verifyUser.verifyToken, userController.getUser);
 
 module.exports = router;
