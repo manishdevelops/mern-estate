@@ -53,4 +53,12 @@ exports.getListing = async (req, res, next) => {
     } catch (error) {
         next(error);
     }
+};
+
+exports.getListings = async (req, res, next) => {
+    try {
+
+    } catch (error) {
+
+    }
 }

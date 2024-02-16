@@ -12,6 +12,8 @@ router.post('/update/:id', verifyUser.verifyToken, listingController.updateListi
 
 router.get('/get/:id', listingController.getListing);
 
+router.get('/get', listingController.getListings);
+
 
 module.exports = router;
 
