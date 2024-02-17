@@ -16,7 +16,8 @@ export default function Search() {
     });
     const [loading, setLoading] = useState(false);
     const [listings, setListings] = useState([]);
-    console.log(sidebarData);
+    // console.log(sidebarData);
+    const [showMore, setShowMore] = useState(false);
 
     const handleChange = (e) => {
         if (e.target.id === 'all' || e.target.id === 'rent' || e.target.id === 'sale') {
@@ -59,6 +60,20 @@ export default function Search() {
 
     };
 
+    const onShowMoreClick = async () => {
+        const numberOfListings = listings.length;
+        const startIndex = numberOfListings;
+        const urlParams = new URLSearchParams(window.location.Search);
+        urlParams.set('startIndex', startIndex);
+        const searchQuery = urlParams.toString();
+        const res = await fetch(`/api/listing/get?${searchQuery}`);
+        const data = await res.json();
+        if (data.length <= 7) {
+            setShowMore(false);
+        }
+        setListings([...listings, ...data])
+    }
+
     useEffect(() => {
         const urlParams = new URLSearchParams(window.location.search);
         const searchTermFromUrl = urlParams.get('searchTerm');
@@ -84,9 +99,15 @@ export default function Search() {
 
         const fetchListing = async () => {
             setLoading(true);
+            setShowMore(false)
             const searchQuery = urlParams.toString();
             const res = await fetch(`/api/listing/get?${searchQuery}`);
             const data = await res.json();
+            if (data.length > 6) {
+                setShowMore(true);
+            } else {
+                setShowMore(false);
+            }
             setListings(data);
             setLoading(false);
         }
@@ -157,6 +178,14 @@ export default function Search() {
                     )}
                     {loading && <p className='text-xl text-slate-700 text-center w-full'>Loading...</p>}
                     {!loading && listings && listings.map((listing) => <ListingItem key={listing._id} listing={listing} />)}
+                    {showMore && (
+                        <button
+                            onClick={onShowMoreClick}
+                            className='text-green-700 hover:underline p-7 text-center w-full'
+                        >
+                            Show more
+                        </button>
+                    )}
                 </div>
             </div>
         </div>
