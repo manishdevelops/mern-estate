@@ -86,7 +86,6 @@ exports.getListings = async (req, res, next) => {
         const sort = req.query.sort || 'createdAt';
 
         const order = req.query.order || 'desc';
-        console.log(sort);
         const listings = await Listing.find({
             name: { $regex: searchTerm, $options: 'i' }, // i -> don't care about lower and upper case
             offer,
@@ -95,10 +94,9 @@ exports.getListings = async (req, res, next) => {
             type,
         }).sort({ [sort]: order }).limit(limit).skip(startIndex);
 
-        return res.status(200).json({
-            results: listings.length,
+        return res.status(200).json(
             listings
-        });
+        );
 
     } catch (error) {
         next(error);

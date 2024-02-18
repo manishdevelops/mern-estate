@@ -4,6 +4,7 @@ const dotenv = require('dotenv');
 const userRouter = require('./routes/userRoutes.js');
 const authRouter = require('./routes/authRoutes.js');
 const listingRouter = require('./routes/listingRoutes');
+const path = require('path');
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
 
@@ -23,6 +24,8 @@ mongoose.connect(process.env.MONGODB).then(() => {
     console.log(err);
 });
 
+// const __dirname = path.resolve();
+
 app.listen(3001, () => {
     console.log('serving running on port 3001...');
 });
@@ -30,6 +33,12 @@ app.listen(3001, () => {
 app.use('/api/user', userRouter);
 app.use('/api/auth', authRouter);
 app.use('/api/listing', listingRouter);
+
+app.use(express.static(path.join(__dirname, '/client/dist')));
+
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, 'client', 'dist', 'index.html'));
+});
 
 app.use((err, req, res, next) => {
     const statusCode = err.statusCode || 500;
