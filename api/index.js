@@ -11,7 +11,7 @@ const cookieParser = require('cookie-parser');
 dotenv.config();
 
 const app = express();
-app.use(express.static(path.join(__dirname, '/client/dist')));
+app.use(express.static(path.join(__dirname, '../client/dist')));
 
 
 app.use(express.json());
@@ -26,7 +26,6 @@ mongoose.connect(process.env.MONGODB).then(() => {
     console.log(err);
 });
 
-// const __dirname = path.resolve();
 
 app.listen(3001, () => {
     console.log('serving running on port 3001...');
