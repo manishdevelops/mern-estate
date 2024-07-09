@@ -17,10 +17,10 @@ export default function Profile() {
     const [updateSuccess, setUpdateSuccess] = useState(false);
     const [showListingsError, setShowListingsError] = useState(false);
     const [userListings, setUserListings] = useState([]);
-    console.log(userListings)
+    // console.log(userListings)
     const dispatch = useDispatch();
 
-    console.log(formData)
+    // console.log(formData)
     // console.log(fileUploadError)
     // console.log(file)
     // console.log(filePerc);
@@ -59,7 +59,7 @@ export default function Profile() {
         setFormData({ ...formData, [e.target.id]: e.target.value });
     }
 
-    console.log(formData)
+    // console.log(formData)
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {

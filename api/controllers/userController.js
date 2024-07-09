@@ -25,7 +25,6 @@ exports.updateUser = async (req, res, next) => {
                 avatar: req.body.avatar,
             }
         }, { new: true });
-        console.log(updatedUser);
         updatedUser.password = undefined;
         res.status(200).json(updatedUser);
     } catch (error) {
