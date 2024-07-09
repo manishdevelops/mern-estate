@@ -84,7 +84,6 @@ export default function Search() {
         const sortFromUrl = urlParams.get('sort');
         const orderFromUrl = urlParams.get('order');
 
-
         if (searchTermFromUrl || typeFromUrl || parkingFromUrl || furnishedFromUrl || offerFromUrl || sortFromUrl || orderFromUrl) {
             setSidebarData({
                 searchTerm: searchTermFromUrl || '',

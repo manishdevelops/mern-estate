@@ -5,20 +5,16 @@ const userRouter = require('./routes/userRoutes.js');
 const authRouter = require('./routes/authRoutes.js');
 const listingRouter = require('./routes/listingRoutes');
 const path = require('path');
-const cors = require('cors');
 const cookieParser = require('cookie-parser');
 
 dotenv.config();
 
 const app = express();
-app.use(express.static(path.join(__dirname, '../client/dist')));
-
 
 app.use(express.json());
 
 app.use(cookieParser());
 
-app.use(cors());
 
 mongoose.connect(process.env.MONGODB).then(() => {
     console.log('Connected to MONGODB');
@@ -36,8 +32,9 @@ app.use('/api/auth', authRouter);
 app.use('/api/listing', listingRouter);
 
 
-app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, 'client', 'dist', 'index.html'));
+app.use(express.static(path.join(__dirname, '../client/build')));
+app.get('*', function (req, res) {
+    res.sendFile(path.join(__dirname, '../client/build', 'index.html'));
 });
 
 app.use((err, req, res, next) => {

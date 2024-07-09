@@ -5,7 +5,6 @@ const verifyUser = require('../utils/verifyUser');
 const router = express.Router();
 
 router.get('/test', userController.test);
-
 router.post('/update/:id', verifyUser.verifyToken, userController.updateUser);
 
 router.delete('/delete/:id', verifyUser.verifyToken, userController.deleteUser);
