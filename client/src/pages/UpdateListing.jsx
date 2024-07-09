@@ -147,7 +147,7 @@ export default function UpdateListing() {
                 console.log(data.message);
                 return;
             }
-            console.log(data)
+            // console.log(data)
             setFormData(data)
         }
         fetchListing();
